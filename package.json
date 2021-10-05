@@ -21,6 +21,7 @@
         "vue-jest": "^5.0.0-0"
     },
     "prettier": {
+        "trailingComma": "es5",
         "tabWidth": 4,
         "singleQuote": true
     }
