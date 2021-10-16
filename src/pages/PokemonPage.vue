@@ -9,10 +9,12 @@
             :pokemons="pokemonArr"
             @selectionPokemon="checkAnswer"
         />
+        <!-- se pueden usar templates como fragments en react -->
+        <template v-if="showAnswer">
+            <h2 class="fade-in">{{ message }}</h2>
 
-        <h2>{{ message }}</h2>
-
-        <button>Nuevo Juego</button>
+            <button @click="newGame">Nuevo Juego</button>
+        </template>
     </div>
 </template>
 
@@ -43,10 +45,17 @@ export default {
         },
         checkAnswer(selectedId) {
             this.showPokemon = true;
-            this.showAnswer = false;
+            this.showAnswer = true;
             selectedId === this.pokemon.id
-                ? (this.message = `Exacto! El pokemon es: ${this.pokemon.name}`)
+                ? (this.message = `¡Exacto! El pokemon es: ${this.pokemon.name}`)
                 : (this.message = `Lo siento, el pokemon es ${this.pokemon.name}`);
+        },
+        newGame() {
+            this.showPokemon = false;
+            this.showAnswer = false;
+            this.pokemonArr = [];
+            this.pokemon = null;
+            this.mixPokemonArray();
         },
     },
     //llamando a mounted lifecycle hook (metodo que se llama 1 sola vez en cada recarga)
